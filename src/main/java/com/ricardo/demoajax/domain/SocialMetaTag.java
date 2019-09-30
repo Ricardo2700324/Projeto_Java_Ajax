@@ -3,7 +3,7 @@ package com.ricardo.demoajax.domain;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class SocialMateTag implements Serializable {
+public class SocialMetaTag implements Serializable {
 
 	
 	private String site;
@@ -37,6 +37,22 @@ public class SocialMateTag implements Serializable {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("SocialMetaTag [site=");
+		builder.append(site);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append(", url=");
+		builder.append(url);
+		builder.append(", image=");
+		builder.append(image);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
 	
 	
 }
