@@ -21,8 +21,12 @@ public class DemoAjaxApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		SocialMetaTag og = service.getOpenGraphByUrl("https://www.udemy.com/course/ux-design/");
+		SocialMetaTag og = service.getOpenGraphByUrl("https://www.pichau.com.br/placa-de-video-sapphire-radeon-rx-580-4gb-gddr5-nitro-256-bit-11265-07-20g");
 		System.out.println(og.toString());
+		
+		SocialMetaTag twitter = service.getTwitterCardByUrl("https://www.pichau.com.br/placa-de-video-sapphire-radeon-rx-580-4gb-gddr5-nitro-256-bit-11265-07-20g");
+		System.out.println(twitter.toString());
+		
 	}
 
 }
