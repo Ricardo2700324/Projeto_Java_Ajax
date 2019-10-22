@@ -22,7 +22,7 @@ $("#form-add-promo").submit(function(evt){
 		url: "/promocao/save",
 		data: promo, 
 		success: function(){
-			$("alert").addClass("alert alert-success").text("OK! Promoção cadastrada com sucesso!")
+			$("#alert").addClass("alert alert-success").text("OK! Promoção cadastrada com sucesso!")
 		},
 		error:function(xhr){
 			console.log("> error", xhr.responseText);
