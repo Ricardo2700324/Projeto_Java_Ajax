@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
@@ -25,25 +27,31 @@ public class Promocao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank(message = "O campo título não foi preenchido!")
 	@Column(name = "titulo", nullable = false)
 	private String titulo;
 
+	@NotBlank(message = "O link da promoção precisa ser preenchido!")
 	@Column(name = "link_promocao", nullable = false)
 	private String linkPromocao;
 
+	
 	@Column(name = "site_promocao", nullable = false)
 	private String site;
 
 	@Column(name = "descricao")
 	private String descricao;
 
+	
 	@Column(name = "link_imagem", nullable = false)
 	private String linkImagem;
 
+	@NotNull(message = "Uma categoria é requerida!")
 	@ManyToOne
 	@JoinColumn(name = "categoria_fk")
 	private Categoria categoria;
 
+	@NotNull(message = "O preço precisa ser informado!")
 	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
 	@Column(name = "preco_promocao", nullable = false)
 	private BigDecimal preco;
