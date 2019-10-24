@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ricardo.demoajax.domain.Categoria;
 import com.ricardo.demoajax.domain.Promocao;
@@ -50,6 +51,14 @@ public class PromocaoController {
 		return "promo-list";
 	}
 	
+	
+	@GetMapping("/list/ajax")
+	public String listarCards(@RequestParam(name = "page", defaultValue = "1") int page, ModelMap model) {
+		Sort sort = new Sort(Sort.Direction.DESC, "dtCadastro");
+		PageRequest pageRequest = PageRequest.of(page, 8, sort);
+		model.addAttribute("promocoes", promocaoRepository.findAll(pageRequest));
+		return "promo-card";
+	}
 	
 	//================================ADD OFERTAS==================================================
 	
