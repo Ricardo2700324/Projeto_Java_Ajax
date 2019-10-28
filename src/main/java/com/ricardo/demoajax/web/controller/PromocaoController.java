@@ -50,7 +50,13 @@ public class PromocaoController {
 		List<String> sites = promocaoRepository.findSiteByTermo(termo);
 		return ResponseEntity.ok(sites);
 	} 
-	
+	@GetMapping("/site/list")
+	public String listarPorSite(@RequestParam("site") String site, ModelMap model) {
+		Sort sort = new Sort(Sort.Direction.DESC, "dtCadastro");
+		PageRequest pageRequest = PageRequest.of(0, 8, sort);
+		model.addAttribute("promocoes", promocaoRepository.findBySite(site, pageRequest));
+		return "promo-card";
+	}
 	
 	
 	//================================ADD LIKES==================================================

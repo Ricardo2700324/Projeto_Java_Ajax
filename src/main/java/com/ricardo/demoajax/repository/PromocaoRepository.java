@@ -1,7 +1,9 @@
 package com.ricardo.demoajax.repository;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,6 +14,9 @@ import com.ricardo.demoajax.domain.Promocao;
 
 public interface PromocaoRepository extends JpaRepository<Promocao, Long> {
 
+	@Query("select p from Promocao p where p.site like :site")
+	Page<Promocao> findBySite(@Param("site") String site, org.springframework.data.domain.Pageable pageble);
+	
 	//autocomplete
 	@Query("select distinct p.site from Promocao p where p.site like %:site%")
 	List<String> findSiteByTermo(@Param("site") String site );
