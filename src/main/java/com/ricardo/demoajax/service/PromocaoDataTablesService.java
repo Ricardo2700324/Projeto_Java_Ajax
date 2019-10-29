@@ -5,6 +5,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+
 import com.ricardo.demoajax.repository.PromocaoRepository;
 
 public class PromocaoDataTablesService {
@@ -24,6 +29,9 @@ public class PromocaoDataTablesService {
 		int current = currentPage(start, lenght);
 		
 		String column = columnName(request);
+		Sort.Direction direction = orderBy(request);
+		
+		Pageable pageable = PageRequest.of(current, lenght, direction, column); 
 		
 		Map<String, Object> json = new LinkedHashMap<>();
 		json.put("draw", null);
@@ -32,6 +40,15 @@ public class PromocaoDataTablesService {
 		json.put("data", null);
 		
 		return json;
+	}
+
+	private Direction orderBy(HttpServletRequest request) {
+		String order = request.getParameter("order[0][dir]");
+		Sort.Direction sort = Sort.Direction.ASC;
+		if(order.equalsIgnoreCase("desc")) {
+			sort = Sort.Direction.DESC;
+		}
+		return sort;
 	}
 
 	private String columnName(HttpServletRequest request) {
