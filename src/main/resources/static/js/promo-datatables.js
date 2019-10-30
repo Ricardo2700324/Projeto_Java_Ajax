@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	
+	moment.locale('pt-br');
 	$("#table-server").DataTable({
 		processing: true,
 		serverSide: true, 
@@ -18,7 +18,11 @@ $(document).ready(function(){
 			 {data: 'linkImagem'},
 			 {data: 'preco', render: $.fn.dataTable.render.number('.', ',', 2, 'R$')},
 			 {data: 'likes'},
-			 {data: 'dtCadastro'},
+			 {data: 'dtCadastro', render: 
+				 function(dtCadastro){
+				 return moment( dtCadastro ).format('LLL'); 
+			 }
+			},
 			 {data: 'categoria.titulo'}
 		]
 	});
