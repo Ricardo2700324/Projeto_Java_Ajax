@@ -62,6 +62,12 @@ public class PromocaoController {
 		promocaoRepository.deleteById(id);
 		return ResponseEntity.ok().build();
 	}
+	//editar promocao dataTable
+	@GetMapping("/edit/{id}")
+	public ResponseEntity<?> preEditarPromocao(@PathVariable("id") Long id){
+		Promocao promo = promocaoRepository.findById(id).get();
+		return ResponseEntity.ok(promo);
+	}
 	
 	//================================AUTOCOMPLETE==================================================
 	
