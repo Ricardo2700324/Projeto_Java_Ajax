@@ -66,12 +66,29 @@ $(document).ready(function(){
 	
 	//acao do botao editar
 	$("#btn-editar").on('click', function(){
-		var id = table.row(table.$('tr.selected')).data().id;
-		alert('click no botão editar ' + id);
+		if( isSelectedRow() ){
+			$("#modal-form").modal('show');
+		}
 	});
 	
 	//acao do botao excluir
 	$("#btn-excluir").on('click', function(){
-		alert('click no botão excluir');
+		if( isSelectedRow() ){
+			$("#modal-delete").modal('show');
+		}
 	});
+	
+	
+	//funcao para recuperar o id
+	function getPromoId(){
+		return table.row(table.$('tr.selected')).data().id;
+	}
+	
+	function isSelectedRow(){
+		var trow = table.row(table.$('tr.selected'));
+		return trow.data() !== undefined;
+	}
+	
+	
+	
 });
