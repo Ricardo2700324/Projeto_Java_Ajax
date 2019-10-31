@@ -73,6 +73,11 @@ $(document).ready(function(){
 				method: "GET",
 				url: "/promocao/edit/" + id,
 				beforeSend: function(){
+					//removendo as mensagens
+					$("span").closest('.error-span').remove();
+					//removendo as bordas vermelhas nos campos.
+					$(".is-invalid").removeClass("is-invalid");
+					//abre o modal
 					$("#modal-form").modal('show');
 				},
 				success: function( data ){
@@ -110,6 +115,13 @@ $(document).ready(function(){
 			method: "POST",
 			url: "/promocao/edit",
 			data: promo,
+			beforeSend: function(){
+				//removendo as mensagens
+				$("span").closest('.error-span').remove();
+				//removendo as bordas vermelhas nos campos.
+				$(".is-invalid").removeClass("is-invalid");
+				
+			},
 			success: function(){
 				$("#modal-form").modal("hide");
 				table.ajax.reload();
