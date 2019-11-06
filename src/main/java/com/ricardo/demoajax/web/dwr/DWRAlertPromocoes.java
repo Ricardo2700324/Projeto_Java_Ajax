@@ -45,7 +45,7 @@ public class DWRAlertPromocoes {
 		WebContext context = WebContextFactory.get();
 		
 		timer = new Timer();
-		timer.schedule(new AlertTask(context, lastDate), 10000, 60000);
+		timer.schedule(new AlertTask(context, lastDate), 10000, 30000);
 		
 	}
 	
