@@ -2,7 +2,9 @@ package com.ricardo.demoajax.repository;
 
 import java.awt.print.Pageable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +16,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ricardo.demoajax.domain.Promocao;
 
 public interface PromocaoRepository extends JpaRepository<Promocao, Long> {
+	
+	@Query("select count(p.id) as count, max(p.dtCadastro) as lastDate "
+			+ "from Promocao p where p.dtCadastro > :data")
+	Map<String, Object> totalAndUltimaPromocaoByDataCadastro(@Param("data") LocalDateTime data);
+	
+	@Query("select p.dtCadastro from Promocao p")
+	Page<LocalDateTime> findUltimaDataDePromocao(org.springframework.data.domain.Pageable pageable);
+	
 	
 	@Query("select p from Promocao p where p.preco = :preco")
 	Page<Promocao> findByPreco(@Param("preco") BigDecimal preco, org.springframework.data.domain.Pageable pageable);
